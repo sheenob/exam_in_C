@@ -1,8 +1,10 @@
-#include <stdio.h>
 #include "functions.h"
+#include <assert.h>
+#include <stdio.h>
 
 int main() {
-    int result = calculus(5, 2);
-    printf("Le résultat de 5 + 2 est: %d\n", result);
+    Node* root = createNode(1);
+    assert(root->data == 1);
+    freeNode(root);
     return 0;
 }

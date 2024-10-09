@@ -1,6 +1,9 @@
 #ifndef FUNCTIONS_H
 #define FUNCTIONS_H
 
-int calculus(int a, int b);
+#include "node.h"
 
-#endif
+Node* createNode(int data); /* Function to create a new node */
+void freeNode(Node* node); /* Function to free a node */
+
+#endif // FUNCTIONS_H
