@@ -9,7 +9,6 @@ int main() {
     INSERT(root, 20);
     INSERT(root, 30);
 
-    /*printTree(root);*/
 
     // Inorder traversal
     printf("\nInorder traversal of the given Binary Search "
@@ -37,7 +36,6 @@ int main() {
     } else {
         printf("\n%d is not in the tree\n", valueToSearch);
     }
-    /*printTree(root);*/
 
     freeNode(root);
     return 0;
