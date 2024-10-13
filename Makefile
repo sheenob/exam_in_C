@@ -6,7 +6,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -g -fsanitize=address
 
 # Fichiers objets
-OBJS = main.o tree.o
+OBJS = main.o node.o queue.o
 
 # Fichier exécutable final
 EXEC = test
@@ -16,11 +16,14 @@ $(EXEC): $(OBJS)
 	$(CC) $(CFLAGS) -o $(EXEC) $(OBJS)
 
 # Règle pour compiler chaque fichier .o à partir des fichiers .c
-main.o: main.c functions.h node.h
+main.o: main.c node.h queue.h
 	$(CC) $(CFLAGS) -c main.c
 
-tree.o: tree.c functions.h node.h
+tree.o: node.c node.h queue.h
 	$(CC) $(CFLAGS) -c tree.c
+
+queue.o: queue.c queue.h
+	$(CC) $(CFLAGS) -c queue.c
 
 # Commande pour nettoyer (supprimer) les fichiers objets et l'exécutable
 clean:
