@@ -5,7 +5,7 @@
 #include "queue.h"
 
 //Function to display the tree
-void printTree(Node* root) {
+void displayTree(Node* root) {
     if (root == NULL) {
         return;
     }
@@ -54,7 +54,7 @@ void freeNode(Node* node) {
 
 
 //Function to insert a node into the binary tree
-Node* insertNode(Node* root, int data) {
+Node* INSERT(Node* root, int data) {
     if (root == NULL) {
         root = createNode(data);
         return root;
@@ -90,7 +90,7 @@ Node* insertNode(Node* root, int data) {
 
 
 //Function to search for a node in the binary tree
-Node* searchNode(Node* root, int data) {
+Node* SEARCH(Node* root, int data) {
     if (root == NULL) {
         return NULL;
     }
@@ -112,15 +112,15 @@ Node* searchNode(Node* root, int data) {
         if (temp->right != NULL) {
             addToQueue(q, temp->right);
         }
-
     }
+    
 
     freeQueue(q);
     return NULL;
 }
 
 //Function to delete a node from the binary tree
-Node* deleteNode(Node* root, int data) {
+Node* DELETE(Node* root, int data) {
     if (root == NULL) {
         return NULL;
     }
@@ -207,4 +207,17 @@ Node* deleteDeepestNode(Node* root, Node* deepestNode) {
 
     freeQueue(q);
     return root;
+}
+
+
+// function to perform inorder traversal in a binary tree
+void TRAVERSAL(Node* root)
+{
+    if (root == NULL) {
+        return;
+    }
+
+    TRAVERSAL(root->left);
+    printf("%d ", root->data);
+    TRAVERSAL(root->right);
 }
