@@ -71,7 +71,7 @@ Node* INSERT(Node* root, int data) {
             addToQueue(q, temp->left);
         } else {
             temp->left = createNode(data);
-            free(q); // Libération de la mémoire de la queue
+            freeQueue(q); // Libération de la mémoire de la queue
             return root;
         }
 
@@ -137,28 +137,41 @@ Node* DELETE(Node* root, int data) {
     Queue* q = createQueue();
     addToQueue(q, root);
 
-    Node* temp = NULL;
-    Node* keyNode = NULL;
+    Node* temp = NULL; //temporary variable to traverse the tree
+    Node* keyNode = NULL; //store the node that matches the key
+    Node* lastNode = NULL; //store the last node encountered during the level-order traversal of the tree
+    Node* parentOfLastNode = NULL; //store the parent of the last node
 
     while (!isEmpty(q)) {
         temp = removeFromQueue(q);
+
         if (temp->data == data) {
             keyNode = temp;
         }
 
         if (temp->left != NULL) {
             addToQueue(q, temp->left);
+            parentOfLastNode = temp;
+            lastNode = temp->left;
         }
 
         if (temp->right != NULL) {
             addToQueue(q, temp->right);
+            parentOfLastNode = temp;
+            lastNode = temp->right;
         }
     }
 
+    /*handles the deletion of a node by replacing the node to be deleted with 
+    the deepest node in the tree and then removing the deepest node*/
     if (keyNode != NULL) {
-        int x = temp->data;
-        deleteDeepestNode(root, temp);
-        keyNode->data = x;
+        keyNode->data = lastNode->data;
+        if (parentOfLastNode->left == lastNode) {
+            parentOfLastNode->left = NULL;
+        } else {
+            parentOfLastNode->right = NULL;
+        }
+        free(lastNode);
     }
 
     freeQueue(q);
@@ -166,49 +179,21 @@ Node* DELETE(Node* root, int data) {
 }
 
 
-//Function to delete the deepest node in the binary tree
-Node* deleteDeepestNode(Node* root, Node* deepestNode) {
-    Queue* q = createQueue();
-    addToQueue(q, root);
+//Function to swap two nodes in a binary tree
+Node* SWAP(Node* root, int data1, int data2) {
+    Node* node1 = SEARCH(root, data1);
+    Node* node2 = SEARCH(root, data2);
 
-    Node* temp = NULL;
-
-    while (!isEmpty(q)) {
-        temp = removeFromQueue(q);
-        if (temp == deepestNode) {
-            temp = NULL;
-            free(deepestNode);
-            freeQueue(q);
-            return root;
-        }
-
-        if (temp->left != NULL) {
-            if (temp->left == deepestNode) {
-                temp->left = NULL;
-                free(deepestNode);
-                freeQueue(q);
-                return root;
-            } else {
-                addToQueue(q, temp->left);
-            }
-        }
-
-        if (temp->right != NULL) {
-            if (temp->right == deepestNode) {
-                temp->right = NULL;
-                free(deepestNode);
-                freeQueue(q);
-                return root;
-            } else {
-                addToQueue(q, temp->right);
-            }
-        }
+    if (node1 == NULL || node2 == NULL) {
+        return root;
     }
 
-    freeQueue(q);
+    int temp = node1->data;
+    node1->data = node2->data;
+    node2->data = temp;
+
     return root;
 }
-
 
 // function to perform inorder traversal in a binary tree
 void TRAVERSAL(Node* root)

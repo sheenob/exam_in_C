@@ -18,7 +18,7 @@ void displayTree(Node* root); /* Function to print the tree */
 Node* INSERT(Node* root, int data);
 Node* SEARCH(Node* root, int data);
 Node* DELETE(Node* root, int data);
-Node* deleteDeepestNode(Node* root, Node* deepestNode);
+Node* SWAP(Node* root, int data1, int data2);
 void TRAVERSAL(Node* root);
 
 

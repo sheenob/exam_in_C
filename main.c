@@ -8,6 +8,10 @@ int main() {
     root = INSERT(root, 10);
     INSERT(root, 20);
     INSERT(root, 30);
+    INSERT(root, 40);
+    INSERT(root, 50);
+    INSERT(root, 60);
+    INSERT(root, 70);
 
 
     // Inorder traversal
@@ -36,6 +40,15 @@ int main() {
     } else {
         printf("\n%d is not in the tree\n", valueToSearch);
     }
+
+    //SWAP
+    int valueToSwap1, valueToSwap2;
+    printf("\nWich data do you want to swap : ");
+    scanf("%d %d", &valueToSwap1, &valueToSwap2);
+    SWAP(root, valueToSwap1, valueToSwap2);
+    printf("\nInorder traversal after swapping %d and %d : ", valueToSwap1, valueToSwap2);
+    TRAVERSAL(root);
+    printf("\n");
 
     freeNode(root);
     return 0;
